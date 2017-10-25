@@ -1,6 +1,12 @@
 var Gpio = require('onoff').Gpio
 var led = new Gpio(17, 'out');
 
+//i2c setting
+var i2c = require('i2c');
+var address_adt7410 = 0x48;
+var adt7410 = new i2c(address_adt7410, {device: '/dev/i2c-1'});
+
+//bluetooth setting
 var bleno = require('bleno');
 var util = require('util');
 
@@ -62,3 +68,19 @@ function exit() {
         process.exit();
 }
 process.on('SIGINT', exit); //ctr + c などの信号
+
+//温度センサ関数
+readTemp = function(callback) {
+    sensor.readBytes(0x00, 2, function(err, data) {
+        var temp, value;
+        temp = (data[0] << 8 | data[1]) >> 3;
+        if (temp >= 4096) {
+            temp -= 8192;
+            }
+        value = temp * 0.0625;
+        console.log("Temperature: " + value + " [Deg. C.]");
+        callback(value);
+    });
+};
+
+//
