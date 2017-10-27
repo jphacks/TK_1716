@@ -6,6 +6,24 @@ var i2c = require('i2c');
 var address_adt7410 = 0x48;
 var adt7410 = new i2c(address_adt7410, {device: '/dev/i2c-1'});
 
+//1-wire setting, GPIO4 pin, (DHT11)
+const raspi = require('raspi');
+const OneWire = require('raspi-onewire').OneWire;
+
+raspi.init(() => {
+  const bus = new OneWire();
+  bus.searchForDevices((err, devices) => {
+    bus.readAllAvailable(devices[0], (err, data) => {
+      console.log(data);
+    });
+  });
+});
+
+//adc setting
+var Mcp3008 = require('mcp3008.js'),
+    adc = new Mcp3008(),
+    channel = 0;
+
 //bluetooth setting
 var bleno = require('bleno');
 var util = require('util');
@@ -69,6 +87,7 @@ function exit() {
 }
 process.on('SIGINT', exit); //ctr + c などの信号
 
+/*----------------------sensors-----------------------------*/
 //温度センサ関数
 readTemp = function(callback) {
     sensor.readBytes(0x00, 2, function(err, data) {
@@ -83,4 +102,12 @@ readTemp = function(callback) {
     });
 };
 
-//
+readTemp();
+
+//温湿度センサ読み込み(?)いらない？
+
+
+//臭気センサ読み込み
+adc.read(channel, function (value) {
+    doSomethingToValue(value);
+});
