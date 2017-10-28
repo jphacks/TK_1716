@@ -1,23 +1,14 @@
-https://qiita.com/kentarohorie/items/b9549af9c71886860866
+//got main code from https://qiita.com/kentarohorie/items/b9549af9c71886860866
+//var Gpio = require('onoff').Gpio
+//var led = new Gpio(17, 'out');
 
-var Gpio = require('onoff').Gpio
-var led = new Gpio(17, 'out');
+/*
+var serialPort = require("serialport")
+var sp = new serialPort.SerialPort("/dev/ttyACM0",{
+	baudrate: 115200,
+	parser:serialPort.parsers.readline("\n")
+});
 
-const fs = require('fs');
-
-function readText(filename){
-  text = fs.readFileSync(filename, 'utf8');
-  text = text.replace(/\r?\n/g,””);
- text = text.split(“,”);
- text = text.map(function(n) { return Number(n)});
- return text //array of int-s
-}
-
-//var serialPort = require("serialport")
-//var sp = new serialPort.SerialPort("/dev/ttyACM0",{
-//	baudrate: 115200,
-//	parser:serialPort.parsers.readline("\n")
-//});
 
 var i2c = require('i2c');
 var adt7410_address = 0x48;
@@ -43,12 +34,30 @@ function readTemp(){
 
   value0 = new Buffer(2);
   //value0.writeUInt16BE(temp0);
-  value0.writeUInt16BE(500);
+  //value0.writeUInt16BE(500);
 
   return value0;
 };
 
-console.log(readTemp());
+*/
+
+//console.log(readTemp());
+
+
+const fs = require('fs');
+
+function readText(filename){
+  text = fs.readFileSync(filename, 'utf8');
+  text = text.replace("/\r?\n/g");
+  text = text.split(",");
+  text = text.map(function(n) { return Number(n)});
+  return text //array of int-s
+}
+
+var text = [0,0,0,0,0]
+text = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/text.txt')
+
+console.log(text)
 
 var bleno = require('bleno');
 var util = require('util');
@@ -118,7 +127,8 @@ util.inherits(DownCharacteristic, Characteristic);
 
 TempCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request heat');
-        var data = new Buffer(readTemp());
+        var data = new Buffer(2);
+        data.writeUInt16BE(text[0]);
 	console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
@@ -132,8 +142,8 @@ TempCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
 
 HumidityCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request humidity');
-        var data = new Buffer(readTemp());
-	data[0] = 12;
+        var data = new Buffer(2);
+        data.writeUInt16BE(text[1]);
 	console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
@@ -141,7 +151,8 @@ HumidityCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 SmellCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request smell');
-        var data = new Buffer(readTemp());
+        var data = new Buffer(2);
+        data.writeUInt16BE(text[2]);
 	console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
@@ -149,7 +160,8 @@ SmellCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 CryCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request cry');
-        var data = new Buffer(readTemp());
+        var data = new Buffer(2);
+        //data.writeUInt16BE(text[3]);////////////// THIS NEEDS TO BE CHANGED
 	console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
@@ -157,7 +169,8 @@ CryCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 DownCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request heat');
-        var data = new Buffer(readTemp());
+        var data = new Buffer(2);
+        data.writeUInt16BE(text[3]);
 	console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
