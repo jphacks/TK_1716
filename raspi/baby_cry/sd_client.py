@@ -274,7 +274,7 @@ def sound_classifier(clf, cry_array):
     return clas 
 
 def write_class(clas):
-    with open('cry_class.txt', 'w') as f:
+    with open('../cry_class.txt', 'w') as f:
        f.write(str(clas + 1)) 
     return None
 
@@ -287,6 +287,7 @@ if __name__ == "__main__":
 
     cry_frames = np.array([])
     cry_flag = False
+    write_class(0)
     clf = joblib.load('trained_models/clf_rf.pkl.cmp')
     
     create_edge()
