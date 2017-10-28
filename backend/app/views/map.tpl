@@ -35,7 +35,7 @@
 
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
+          zoom: 14,
           center: init_center
         });
         directionsService = new google.maps.DirectionsService;
