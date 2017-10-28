@@ -16,7 +16,7 @@ def top():
 
 @route('/img/<filename:path>', name='img_file')
 def static(filename):
-    tmp = "/Users/yamazakitakurou/Documents/project/JPHACKS/TK_1716/backend/app/views"
+    tmp = "/var/www/html/views"
     return static_file(filename, root=tmp+"/img")
 
 
