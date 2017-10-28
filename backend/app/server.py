@@ -2,8 +2,7 @@
 import os
 import map_utils
 import numpy as np
-from bottle import route, run
-from bottle import request
+from bottle import route, run, url, request, static_file
 from bottle import TEMPLATE_PATH, jinja2_template as template
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +12,12 @@ TEMPLATE_PATH.append(BASE_DIR + "/views")
 @route('/top')
 def top():
     return template('top')
+
+
+@route('/img/<filename:path>', name='img_file')
+def static(filename):
+    tmp = "/Users/yamazakitakurou/Documents/project/JPHACKS/TK_1716/backend/app/views"
+    return static_file(filename, root=tmp+"/img")
 
 
 @route('/milk', method="GET")
@@ -28,7 +33,7 @@ def milk():
     near_spot = np.array(map_utils.get_near_spot(lat, lng, "milk"))
     print(near_spot)
 
-    return template('map', lat=lat, lng=lng, near_spot=near_spot, ptype="milk")
+    return template('map', lat=lat, lng=lng, near_spot=near_spot, ptype="milk", url=url)
 
 
 @route('/omutsu/', method="GET")
@@ -44,7 +49,7 @@ def omutsu():
     near_spot = map_utils.get_near_spot(lat, lng, "omutsu")
     print(near_spot)
 
-    return template('map', lat=lat, lng=lng, near_spot=near_spot, ptype="omutsu")
+    return template('map', lat=lat, lng=lng, near_spot=near_spot, ptype="omutsu", url=url)
 
 
 if __name__ == "__main__":

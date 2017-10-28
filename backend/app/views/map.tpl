@@ -63,7 +63,12 @@
           var marker = new google.maps.Marker({
             position: location,
             map: map,
-            icon: 'milk.png',
+            {% if ptype=="milk"%}
+            icon: "{{url('img_file', filename="milk.png")}}",
+            {% else %}
+            icon: "{{url('img_file', filename="omutsu.png")}}",
+            {% endif %}
+            scaledSize : new google.maps.Size(25, 25),
             clickable: true,
           });
           var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
