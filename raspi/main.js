@@ -43,7 +43,6 @@ function readTemp(){
 
 //console.log(readTemp());
 
-
 const fs = require('fs');
 
 function readText(filename){
@@ -54,10 +53,8 @@ function readText(filename){
   return text //array of int-s
 }
 
-var text = [0,0,0,0,0]
-text = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/text.txt')
-
-console.log(text)
+var text = [0,0,0,0,0];
+var cry = [0];
 
 var bleno = require('bleno');
 var util = require('util');
@@ -127,9 +124,13 @@ util.inherits(DownCharacteristic, Characteristic);
 
 TempCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request heat');
+        
+        text = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/text.txt'); //directory needs to be changed
+        console.log(text);
+        
         var data = new Buffer(2);
         data.writeUInt16BE(text[0]);
-	console.log(data);
+        console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
 
@@ -160,9 +161,10 @@ SmellCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 CryCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request cry');
+        cry = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/cry.txt');//this need to be changed
+        console.log(cry);
         var data = new Buffer(2);
-        //data.writeUInt16BE(text[3]);////////////// THIS NEEDS TO BE CHANGED
-	console.log(data);
+        data.writeUInt16BE(cry[0]);
         callback(this.RESULT_SUCCESS, data);
 };
 
