@@ -1,6 +1,6 @@
-# coding: utf-8
+#-*- coding: utf-8-*-
 # author : Takuro Yamazaki
-# description :
+# description : util functions for google map API
 
 import sys
 import mysql.connector
@@ -23,7 +23,7 @@ conn = mysql.connector.connect(
 # google map distance matrix api setting
 gmap_client = client.Client(key=GOOGLE_MAPS_DISTANCE_MATRIX_API_Key)
 
-# sqlとのconnectionがきれないようにする
+# keep sql connection
 conn.ping(reconnect=True)
 
 
@@ -56,7 +56,7 @@ def haversine(lng1, lat1, lng2, lat2):
 
 
 def nearest(api_result):
-    """最近の授乳台の場所を返す
+    """最近の授乳台/オムツ台の場所を返す
     :param api_result: dict, google distance matrix apiの結果
     :return: int, 最近の授乳台が何番目か
     """
@@ -72,7 +72,7 @@ def nearest(api_result):
 
 
 def get_nearest_spot(lat, lng, ptype):
-    """
+    """最近の授乳台/オムツ台の緯度経度を返す
     :param lat: float, 出発地の緯度
     :param lng: float, 出発地の経度
     :param ptype:　str, オムツ台か授乳台か
@@ -107,12 +107,12 @@ def get_nearest_spot(lat, lng, ptype):
 
 
 def get_near_spot(lat, lng, ptype):
+    """2km圏内にある授乳台/オムツ台を返す
+    :param lat: float, 出発地の緯度
+    :param lng: float, 出発地の経度
+    :param ptype:　str, オムツ台か授乳台か
+    :return: pd.Series, 目的地の緯度経度
     """
-        :param lat: float, 出発地の緯度
-        :param lng: float, 出発地の経度
-        :param ptype:　str, オムツ台か授乳台か
-        :return: pd.Series, 目的地の緯度経度
-        """
     lat = float(lat)
     lng = float(lng)
     cur = conn.cursor()

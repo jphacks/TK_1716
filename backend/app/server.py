@@ -1,7 +1,11 @@
-# coding: utf-8
+#-*- coding: utf-8-*-
+# author : Takuro Yamazaki
+# description : bottle templete engine
+
 import os
 import map_utils
 import numpy as np
+
 from bottle import route, run, url, request, static_file
 from bottle import TEMPLATE_PATH, jinja2_template as template
 
@@ -22,11 +26,12 @@ def static(filename):
 
 @route('/milk', method="GET")
 def milk():
-    """最近傍の授乳室を返す
+    """半径2km以内の授乳室にpin
     """
     lat = request.query.get("lat")
     lng = request.query.get("lng")
-    
+
+    # set default value
     lat = 35.714263 if lat is None else float(lat)
     lng = 139.761892 if lng is None else float(lng)
 
@@ -38,11 +43,12 @@ def milk():
 
 @route('/omutsu', method="GET")
 def omutsu():
-    """最近傍のオムツ台を返す
+    """半径2km以内のオムツ台にpin
     """
     lat = request.query.get("lat")
     lng = request.query.get("lng")
 
+    # set default value
     lat = 35.714263 if lat is None else float(lat)
     lng = 139.761892 if lng is None else float(lng)
 

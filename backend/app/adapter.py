@@ -1,4 +1,6 @@
-# coding: utf-8
+#-*- coding: utf-8-*-
+# author : Takuro Yamazaki
+
 import sys, os
 import bottle
 
