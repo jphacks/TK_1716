@@ -3,6 +3,15 @@ https://qiita.com/kentarohorie/items/b9549af9c71886860866
 var Gpio = require('onoff').Gpio
 var led = new Gpio(17, 'out');
 
+const fs = require('fs');
+
+function readText(filename){
+  text = fs.readFileSync(filename, 'utf8');
+  text = text.replace(/\r?\n/g,””);
+ text = text.split(“,”);
+ text = text.map(function(n) { return Number(n)});
+ return text //array of int-s
+}
 
 //var serialPort = require("serialport")
 //var sp = new serialPort.SerialPort("/dev/ttyACM0",{
