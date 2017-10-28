@@ -1,3 +1,4 @@
+# coding: utf-8
 import os
 import map_utils
 import numpy as np

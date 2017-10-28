@@ -22,6 +22,7 @@
     <div id="map"></div>
     <script>
     var map;
+    var currentInfoWindow = null;
     var markers = [];
     var data = receiveData();
     var init_center = {lat: Number(data.lat), lng: Number(data.lng)};
@@ -44,10 +45,10 @@
           preserveViewport: true
         });
 
-        addMarker(init_center, "now");
+        addMarker(init_center, "現在地");
         {% for spot in near_spot%}
-          add_spot = {lat: {{spot[1]}}, lng: {{spot[0]}}};
-          addMarker(add_spot, "");
+          add_spot = {lat: {{spot[2]}}, lng: {{spot[1]}}};
+          addMarker(add_spot, "{{spot[0]}}");
         {% endfor %}
       }
 
@@ -62,11 +63,19 @@
           var marker = new google.maps.Marker({
             position: location,
             map: map,
+            icon: 'milk.png',
             clickable: true,
-            label: label
           });
+          var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+            content: label // 吹き出しに表示する内容
+           });
           google.maps.event.addListener(marker, 'click', function()
           {
+           if (currentInfoWindow) {
+				currentInfoWindow.close();
+			}
+            infoWindow.open(map, marker);
+            currentInfoWindow = infoWindow;
             ShowDirection(marker.position)
           });
           markers.push(marker);

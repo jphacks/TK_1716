@@ -1,3 +1,4 @@
+# coding: utf-8
 # author : Takuro Yamazaki
 # description :
 
@@ -60,7 +61,7 @@ def nearest(api_result):
     :return: int, 最近の授乳台が何番目か
     """
     elements = api_result["rows"][0]["elements"]
-    min_distance = sys.maxsize
+    min_distance = sys.maxint
     min_index = -1
     for i, e in enumerate(elements):
         if e["status"] == "OK":
@@ -134,4 +135,4 @@ def get_near_spot(lat, lng, ptype):
     # haversine distanceが2km以下のものだけ取得
     query_result = query_result[query_result['haversine'] < 2]
 
-    return query_result[["Longtitude", "Latitude"]]
+    return query_result[["Name", "Longtitude", "Latitude"]]
