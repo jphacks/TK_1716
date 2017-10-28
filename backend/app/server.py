@@ -36,7 +36,7 @@ def milk():
     return template('map', lat=lat, lng=lng, near_spot=near_spot, ptype="milk", url=url)
 
 
-@route('/omutsu/', method="GET")
+@route('/omutsu', method="GET")
 def omutsu():
     """最近傍のオムツ台を返す
     """

@@ -45,10 +45,10 @@
           preserveViewport: true
         });
 
-        addMarker(init_center, "現在地");
+        addMarker(init_center, "現在地", true);
         {% for spot in near_spot%}
           add_spot = {lat: {{spot[2]}}, lng: {{spot[1]}}};
-          addMarker(add_spot, "{{spot[0]}}");
+          addMarker(add_spot, "{{spot[0]}}", false);
         {% endfor %}
       }
 
@@ -59,7 +59,15 @@
         return arg;
       }
 
-      function addMarker(location, label){
+      function addMarker(location, label, is_current_position){
+      if (is_current_position) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            clickable: true,
+          });
+      }
+      else {
           var marker = new google.maps.Marker({
             position: location,
             map: map,
@@ -68,9 +76,10 @@
             {% else %}
             icon: "{{url('img_file', filename="omutsu.png")}}",
             {% endif %}
-            scaledSize : new google.maps.Size(25, 25),
-            clickable: true,
+             clickable: true,
           });
+          }
+
           var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
             content: label // 吹き出しに表示する内容
            });
