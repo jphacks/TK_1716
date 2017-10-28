@@ -16,7 +16,7 @@ def top():
 
 @route('/img/<filename:path>', name='img_file')
 def static(filename):
-    tmp = "/var/www/html/views"
+    tmp = "/Users/yamazakitakurou/Documents/project/JPHACKS/TK_1716/backend/app/views"
     return static_file(filename, root=tmp+"/img")
 
 
@@ -46,7 +46,7 @@ def omutsu():
     lat = 35.714263 if lat is None else float(lat)
     lng = 139.761892 if lng is None else float(lng)
 
-    near_spot = np.array(map_utils.get_near_spot(lat, lng, "omutsu"))
+    near_spot = map_utils.get_near_spot(lat, lng, "omutsu")
     print("omutsu", near_spot)
 
     return template('map', lat=lat, lng=lng, near_spot=near_spot, ptype="omutsu", url=url)
