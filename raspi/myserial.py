@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import serial
-#ser = serial.Serial('/dev/ttyACM0', 9600)
-ser = serial.Serial('/dev/cu.usbmodem1421', 9600)
+ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/cu.usbmodem1421', 9600)
 s = [0,1]
 while True:
     read_serial = ser.readline()
