@@ -125,8 +125,8 @@ util.inherits(DownCharacteristic, Characteristic);
 TempCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request heat');
         
-        text = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/text.txt'); //directory needs to be changed
-        console.log(text);
+        text = readText('/home/pi/test/TK_1716/raspi/text.txt'); //directory needs to be changed
+        //console.log(text);
         
         var data = new Buffer(2);
         data.writeUInt16BE(text[0]);
@@ -136,7 +136,7 @@ TempCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 TempCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
         console.log('write request: ' + data.toString('hex'));
-        led.writeSync(data[0]);
+        //led.writeSync(data[0]);
         callback(this.RESULT_SUCCESS);
 };
 
@@ -161,16 +161,18 @@ SmellCharacteristic.prototype.onReadRequest = function(offset, callback) {
 
 CryCharacteristic.prototype.onReadRequest = function(offset, callback) {
         console.log('read request cry');
-        cry = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/cry.txt');//this need to be changed
-        console.log(cry);
+	cry = readText('/home/pi/test/TK_1716/raspi/cry_class.txt');//this need to be changed
+        //cry = readText('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/cry.txt');//this need to be changed
+        //console.log(cry);
         var data = new Buffer(2);
         data.writeUInt16BE(cry[0]);
+	console.log(data);
         callback(this.RESULT_SUCCESS, data);
 };
 
 
 DownCharacteristic.prototype.onReadRequest = function(offset, callback) {
-        console.log('read request heat');
+        console.log('read request down');
         var data = new Buffer(2);
         data.writeUInt16BE(text[3]);
 	console.log(data);
@@ -191,7 +193,7 @@ var lightService = new PrimaryService({
 });
 
 function exit() {
-        led.unexport();
+        //led.unexport();
         process.exit();
 }
 process.on('SIGINT', exit); //ctr + c などの信号
