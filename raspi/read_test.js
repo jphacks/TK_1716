@@ -1,18 +1,10 @@
 
 const fs = require('fs');
 
-fs.readFile('/Users/tomoyukiyyamasaki/github/TK_1716/raspi/text.txt', (err, data) => {
-  if (err) throw err;
-  console.log(data);
-});
-
-
-// カンマで分割し配列に格納
-var resArray = data.split(",");
-// それぞれに番号を付加
-var ret = "";
-for( var i=0 ; i<resArray.length ; i++ ) {
-   ret += '[' + (i+1) + '] ' + resArray[i] + "\n";
+function readText(filename){
+  text = fs.readFileSync(filename, 'utf8');
+  text = text.replace(/\r?\n/g,””);
+ text = text.split(“,”);
+ text = text.map(function(n) { return Number(n)});
+ return text //array of int-s
 }
-// 表示
-console.log(ret);
