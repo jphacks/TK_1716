@@ -1,3 +1,5 @@
+https://qiita.com/kentarohorie/items/b9549af9c71886860866
+
 var Gpio = require('onoff').Gpio
 var led = new Gpio(17, 'out');
 
