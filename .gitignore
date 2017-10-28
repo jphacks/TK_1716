@@ -1,0 +1,8 @@
+# written by kakiuchi
+
+.DS_Store
+.ipynb_checkpoints
+.python-version
+raspi/baby_cry/cry_data/donateacry-corpus
+raspi/baby_cry/cry_data/data
+raspi/baby_cry/*.pyc
