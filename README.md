@@ -1,4 +1,4 @@
-# サンプル（プロダクト名）
+# あのね、
 
 [![Product Name](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://www.youtube.com/channel/UC4PtjOfZTbVp9DwtJv82Lzg)
 
@@ -38,15 +38,15 @@
 今回スポンサーから提供されたAPI、製品などの外部技術があれば記述をして下さい。
 
 * 
-* 
-* 
+* [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/?hl=ja)
+* [Google Maps Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/?hl=ja)
 
 #### フレームワーク・ライブラリ・モジュール
-* 
-* 
+* [bottle](https://bottlepy.org/docs/dev/)
+* [MySQL](https://www.mysql.com/jp/)
 
 #### デバイス
-* 
+* [AWS EC2/ubuntu](https://aws.amazon.com/jp/ec2/)
 * 
 
 ### 研究内容・事前開発プロダクト（任意）
