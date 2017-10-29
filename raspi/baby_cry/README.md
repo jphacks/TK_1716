@@ -1,7 +1,7 @@
 # 赤ちゃんの泣き声分類
 
 ## サンプル動画
-[![sample movie](http://img.youtube.com/vi/LtZOMnYoSAw)/0.jpg)])]]https://youtu.be/LtZOMnYoSAw)
+[![sample movie](http://img.youtube.com/vi/LtZOMnYoSAw)/0.jpg)](https://youtu.be/LtZOMnYoSAw)
 
 ## 概要
 機械学習モデルを用いて赤ちゃんの泣き声の原因を推定する。泣いている原因として、空腹、眠気、不快の3つを仮定する。まず、赤ちゃんの泣き声を、[NEC Sound Event Recognition API](https://www6.arche.blue/portal/)を用いて検出し、その後、検出した泣き声から特徴量を抽出し、モデルによる３クラス分類を行う。
