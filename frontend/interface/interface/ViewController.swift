@@ -57,21 +57,21 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     var smellCharacteristic: CBCharacteristic?
     var cryCharacteristic: CBCharacteristic?
     
+    //温度
     var temperature : Int!
     var temperatureText : String!
     var temperatureFloat : Float = 0
-    
+    //湿度
     var humidity : Int!
     var humidityText : String!
     var humidityFloat : Float = 0
-    
+    //臭気
     var smell : Int!
     var smellText : String!
-    
+    //泣き声
     var cry : Int!
     var cryText : String!
-    
-    
+    //不快指数
     var DI : Float = 0
     var ditext : String = ""
     
@@ -113,10 +113,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //label
     @IBOutlet var temperatureLabel : UILabel!
     @IBOutlet var humidityLabel : UILabel!
+    @IBOutlet var diLabel : UILabel!
+    //check用label
     @IBOutlet var smellLabel : UILabel!
     @IBOutlet var cryLabel : UILabel!
-    @IBOutlet var diLabel : UILabel!
-
     
     
 
@@ -132,7 +132,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             formatter.dateFormat = format
             return formatter.string(from: now as Date)
         }
-        //print(getYear())
+
         yearlabeltext = getYear()
         datelabel.text = yearlabeltext
         
@@ -144,7 +144,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             formatter.dateFormat = format
             return formatter.string(from: now as Date)
         }
-        //print(getToday())
+ 
         datelabeltext = getToday()
         datelabel.text = datelabeltext
         
@@ -161,34 +161,17 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         
     }
     
-    //画面閉じた時
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        //bluetooth timer stop:画面遷移するとその後止まってしまう
-        //bluetoothTimer1.invalidate()
-        //bluetoothTimer2.invalidate()
-        //bluetoothTimer3.invalidate()
-        
-        /*
-        //GPSを止める
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.stopUpdatingLocation()
-        }*/
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //central managerを初期化
-        //centralManager = CBCentralManager(delegate: self, queue: nil)
     }
-    
-    
-    
     
     
     
@@ -210,17 +193,15 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //ペリフェラルスキャン結果を受け取り、名前が合致していればスキャンを停止、ペリフェラルへの接続を開始
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
     {
-        print(peripheral.name)
+       
         guard let pName = peripheral.name else {
             print("false")
             return
         }
-
-        if pName == "raspberrypi" {     //設定した名前
+        
+        //設定した名前
+        if pName == "raspberrypi" {
             print(pName)
-            
-            //peripheral.delegate = self
-            //self.remotePeripheral.append(peripheral)
             
             self.peripheral = peripheral
             self.centralManager.connect(self.peripheral, options: nil)
@@ -228,7 +209,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             centralManager.stopScan()
             print("start connecting")
         } else {
-            //print(pName)
         }
 
     }
@@ -260,7 +240,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         
         for service in services {
             print(service.uuid)
-            if String(describing: service.uuid) == "FF10" {    //使用するサービス
+            //使用するサービス
+            if String(describing: service.uuid) == "FF10" {
                 print("discovering characteristics")
                 peripheral.discoverCharacteristics(nil, for: service)
             }
@@ -434,19 +415,19 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             
             cryLabel.text = cryText
             
-            //milk=1
+            //1:milk
             if cry == 1 {
                 //popviewTimerをセット
                 popviewTimer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.changeViewController4), userInfo: nil, repeats: false)
                 //popviewTimer strart
                 popviewTimer2.fire()
-            //tired=2
+            //2:tired
             } else if cry == 2 {
                 //popviewTimerをセット
                 popviewTimer3 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.changeViewController5), userInfo: nil, repeats: false)
                 //popviewTimer start
                 popviewTimer3.fire()
-            //unconfortable=3
+            //3:unconfortable
             } else if cry == 3 {
                 //popviewTimerをセット
                 popviewTimer4 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.changeViewController6), userInfo: nil, repeats: false)
@@ -461,27 +442,24 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     @objc func changeViewController3() {
         self.performSegue(withIdentifier: "toViewController3", sender: nil)
     }
-    
     //cryに1を受け取ったらViewController4に遷移
     @objc func changeViewController4() {
         self.performSegue(withIdentifier: "toViewController4", sender: nil)
     }
-    
     //cryに2を受け取ったらViewController5に遷移
     @objc func changeViewController5() {
         self.performSegue(withIdentifier: "toViewController5", sender: nil)
     }
-    
     //cryに3を受け取ったらViewController6に遷移
     @objc func changeViewController6() {
         self.performSegue(withIdentifier: "toViewController6", sender: nil)
     }
     
+    
     // Textを任意のViewControllerに受け渡す
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toViewController3") {
             var omutsuUrl: ViewController3 = (segue.destination as? ViewController3)!
-            // ViewControllerのtextVC3にURLを設定
             
             //arrayの一番最後を取得
             latArraylast = latArray.last!
@@ -490,6 +468,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             //サーバーの名前、緯度・経度をURLに設定
             urlStringOmutsu = urlStringOmutsu + serverName + "/omutsu?" + "lat=" + latArraylast + "&lng=" + lngArraylast
             
+            // ViewControllerのtextVC3にURLを設定
             omutsuUrl.textVC3 = urlStringOmutsu
             
         } else if (segue.identifier == "toViewController2") {
@@ -509,6 +488,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             //サーバーの名前、緯度・経度をURLに設定
             urlStringMilk = urlStringMilk + serverName + "/milk?" + "lat=" + latArraylast + "&lng=" + lngArraylast
             
+            //ViewController4のtextVC4にURLを設定
             milkUrl.textVC4 = urlStringMilk
         }
     }
@@ -518,7 +498,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     
     
-    //GPS 権限リクエスト
+    //GPS
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined :
@@ -592,13 +572,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     
-    
-    
-    
-    
     //画面遷移
     
-    //ボタンが押されたらセグウェイ
+    //ボタンが押されたらViewController2へ
     @IBAction func buttonTapped(sender : AnyObject) {
         performSegue(withIdentifier: "toViewController2",sender: nil)
     }
@@ -606,9 +582,5 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //戻るボタン
     @IBAction func goBack(_ segue:UIStoryboardSegue) {}
     
-    
-    
-    
-
 }
 
