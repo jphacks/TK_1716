@@ -1,10 +1,6 @@
 # あのね、
 
-<!--
-[![Anone](https://github.com/jp_hacks/TK_1716/blob/master/img/thumbnail.png)](https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be)
--->
-
-<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.png" width="600px"></a>
+<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.png" width="700px"></a>
 
 ## 製品概要
 ### Baby x Tech
@@ -85,8 +81,7 @@
 予防接種情報など育児に関して記録すべき事項を全てこのアプリで管理する。
 
 ## 開発内容・開発技術
-![Anone](https://github.com/jphacks/TK_1716/blob/master/img/system.png)
-//マイク/センサ->Raspberry Pi->アプリ->map、などの系統図を入れる？
+<img src="https://github.com/jphacks/TK_1716/blob/master/img/system.png" width="700px">
 
 ### 活用した技術
 #### API・データ
