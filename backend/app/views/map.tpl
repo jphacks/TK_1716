@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>Localizing the Map</title>
+    <title>あのね、</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -22,6 +22,7 @@
     <div id="map"></div>
     <script>
     var map;
+    var currentInfoWindow = null;
     var markers = [];
     var data = receiveData();
     var init_center = {lat: Number(data.lat), lng: Number(data.lng)};
@@ -32,14 +33,9 @@
     var directionsService;
     var directionsDisplay;
 
-      // This example displays a map with the language and region set
-      // to Japan. These settings are specified in the HTML script element
-      // when loading the Google Maps JavaScript API.
-      // Setting the language shows the map in the language of your choice.
-      // Setting the region biases the geocoding results to that region.
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 17,
+          zoom: 14,
           center: init_center
         });
         directionsService = new google.maps.DirectionsService;
@@ -49,36 +45,51 @@
           preserveViewport: true
         });
 
-//        ShowDirection({lat: 34.99, lng:134.99});
-        addMarker(init_center);
-        map.addListener('click', function(event) {
-          addMarker(event.latLng);
-        });
-
+        addMarker(init_center, "現在地", true);
+        {% for spot in near_spot%}
+          add_spot = {lat: {{spot[2]}}, lng: {{spot[1]}}};
+          addMarker(add_spot, "{{spot[0]}}", false);
+        {% endfor %}
       }
 
       function receiveData(){
         var arg = new Object;
-        arg["lat"] = 35.714263;
-        arg["lng"] = 139.761892;
-        var pair=location.search.substring(1).split('&');
-        for(var i=0;pair[i];i++) {
-          var kv = pair[i].split('=');
-          arg[kv[0]]=kv[1];
-        }
+        arg["lat"] = {{lat}};
+        arg["lng"] = {{lng}};
         return arg;
       }
 
-      function addMarker(location){
-          var marker = new google.maps.Marker({
+      function addMarker(location, label, is_current_position){
+      if (is_current_position) {
+        var marker = new google.maps.Marker({
             position: location,
-            icon: 'icon.png',
             map: map,
             clickable: true,
-            label: labels[labelIndex++ % labels.length]
           });
+      }
+      else {
+          var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            {% if ptype=="milk"%}
+            icon: "{{url('img_file', filename="milk.png")}}",
+            {% else %}
+            icon: "{{url('img_file', filename="omutsu.png")}}",
+            {% endif %}
+             clickable: true,
+          });
+          }
+
+          var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+            content: label // 吹き出しに表示する内容
+           });
           google.maps.event.addListener(marker, 'click', function()
           {
+           if (currentInfoWindow) {
+				currentInfoWindow.close();
+			}
+            infoWindow.open(map, marker);
+            currentInfoWindow = infoWindow;
             ShowDirection(marker.position)
           });
           markers.push(marker);
