@@ -91,28 +91,28 @@
 
 #### フレームワーク・ライブラリ・モジュール
 * [python](https://www.python.jp/)
-	- [bottle](https://bottlepy.org/docs/dev/)
 	- [Numpy](http://www.numpy.org/)
 	- [Scipy](https://www.scipy.org/)
 	- [pandas](http://pandas.pydata.org/)
 	- [scikit-learn](http://scikit-learn.org/)
 	- [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/)
 	- [Scikits.Talkbox](https://github.com/cournape/talkbox)
+    - [Bottle](https://bottlepy.org/docs/dev/)
+	- [Jinja2](http://jinja.pocoo.org/docs/2.9/)
+	- [mod_wsgi](https://github.com/GrahamDumpleton/mod_wsgi)
 * [MySQL](https://www.mysql.com/jp/)
 * [Node.js](https://nodejs.org/ja/)
 	- [bleno](https://github.com/sandeepmistry/bleno)
-* [においセンサTGS2450](http://akizukidenshi.com/catalog/g/gP-00989/)
-* [温湿度センサDHT11](http://akizukidenshi.com/catalog/g/gM-07003/)
-* [温度センサADT7410](http://akizukidenshi.com/catalog/g/gM-06675/)
+* [においセンサ TGS2450](http://akizukidenshi.com/catalog/g/gP-00989/)
+* [温湿度センサ DHT11](http://akizukidenshi.com/catalog/g/gM-07003/)
+* [温度センサ ADT7410](http://akizukidenshi.com/catalog/g/gM-06675/)
 
 #### デバイス
 * [AWS EC2/ubuntu](https://aws.amazon.com/jp/ec2/)
 * [Raspberry Pi](https://www.raspberrypi.org/)
 * [Arduino](https://www.arduino.cc/)
 
-### 研究内容・事前開発プロダクト（任意）
-ご自身やチームの研究内容や、事前に持ち込みをしたプロダクトがある場合は、こちらに実績なども含め記載をして下さい。
-
+### 研究内容・事前開発プロダクト
 #### 事前開発プロダクト
 * 赤ちゃん音声のデータ収集
 * スクレイピングによる授乳室、おむつ台の取得
