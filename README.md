@@ -81,7 +81,7 @@
 予防接種情報など育児に関して記録すべき事項を全てこのアプリで管理する。
 
 ## 開発内容・開発技術
-<img src="https://github.com/jphacks/TK_1716/blob/master/img/system.png" width="700px">
+<img src="https://github.com/jphacks/TK_1716/blob/master/img/system.png" width="600px">
 
 ### 活用した技術
 #### API・データ
