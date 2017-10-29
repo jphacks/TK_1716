@@ -67,6 +67,8 @@ def devide_cry_by_value(cry_array):
     smoothed_abs_cry_array = smoothing_fft(smoothing_ave(np.abs(cry_array), width))
     # bottom_limit以上で下からstandard_order番目の値を静音の基準に
     standard = smoothed_abs_cry_array[smoothed_abs_cry_array > bottom_limit].copy()
+    if len(standard) < standard_order * 5:
+	return None
     standard.sort()
     standard = standard[standard_order]
     standard = standard * magni
