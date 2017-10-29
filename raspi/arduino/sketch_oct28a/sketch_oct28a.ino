@@ -31,7 +31,8 @@ void setup() {
 void loop() {
  int val_average = 0;
  int val = 0;
- int val_threshold=300;
+ int val_threshold=350;
+ int smell_loop = 4;
  int databytes[] = {0,0,0,0,0};
  float temp;
  
@@ -80,7 +81,7 @@ void loop() {
   
   
 
- for (int i = 0; i<8; i++){
+ for (int i = 0; i<smell_loop; i++){
    delay(237);
    digitalWrite(PIN_SENSOR,HIGH); // Sensor Pullup On
    delay(3);
@@ -93,7 +94,7 @@ void loop() {
    digitalWrite(PIN_HEATER,HIGH); // Heater Off   
  }
  
- val_average = val/8;
+ val_average = val/smell_loop;
  //Serial.println(val_average);
  if(val_average<val_threshold){
     databytes[2] = 1;

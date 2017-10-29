@@ -39,19 +39,41 @@
 
 
 ## 開発内容・開発技術
+
+//マイク/センサ->Raspberry Pi->アプリ->map、などの系統図を入れる？
+
 ### 活用した技術
 #### API・データ
 今回スポンサーから提供されたAPI、製品などの外部技術があれば記述をして下さい。
 
 * 
 * 
-* 
+*
 
 #### フレームワーク・ライブラリ・モジュール
-* 
+
+Python
+Node.js
+Arduino IDE
+
+*　
 * 
 
 #### デバイス
+
+##### ハードウェア
+・Raspberry Pi
+・Arduino
+・USB マイク
+
+##### センサ類
+・においセンサTGS2450
+http://akizukidenshi.com/catalog/g/gP-00989/
+・温湿度センサDHT11
+http://akizukidenshi.com/catalog/g/gM-07003/
+・温度センサADT7410
+http://akizukidenshi.com/catalog/g/gM-06675/
+
 * 
 * 
 
@@ -66,3 +88,5 @@
 #### 2日間に開発した独自の機能・技術
 * 独自で開発したものの内容をこちらに記載してください
 * 特に力を入れた部分をファイルリンク、またはcommit_idを記載してください（任意）
+
+センサの読み込み
