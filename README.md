@@ -98,7 +98,7 @@
 #### デバイス
 * [AWS EC2/ubuntu](https://aws.amazon.com/jp/ec2/)
 * [Raspberry Pi](https://www.raspberrypi.org/)
-* [Ardiuno](https://www.arduino.cc/)
+* [Arduino](https://www.arduino.cc/)
 
 ### 研究内容・事前開発プロダクト（任意）
 ご自身やチームの研究内容や、事前に持ち込みをしたプロダクトがある場合は、こちらに実績なども含め記載をして下さい。
