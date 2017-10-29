@@ -1,20 +1,28 @@
 # author : Takuro Yamazaki
-# description : スクレイピングした情報をDBに追加
+# description : スクレイピングした授乳室、オムツ台情報をDBに格納
 
 import glob
 import pandas as pd
 import mysql.connector
 
+from setting import *
+
+
 # mysql server setting
 conn = mysql.connector.connect(
     host='localhost',
     port=3306,
-    user='root',
-    password='hogehogehoge',
-    database='anone',
+    user=MYSQL_USER,
+    password=MYSQL_PW,
+    database=MYSQL_DB,
 )
 
-def create_db():
+
+def create_db() -> None:
+    """./dataに格納された授乳室情報をMySQLのDBに保存
+    """
+
+    # ./dataに格納された各区市村の授乳室、オムツ台情報
     wards = glob.glob("../data/*.csv")
     df = pd.read_csv(wards[0], index_col=0, dtype=str)
 
@@ -22,7 +30,7 @@ def create_db():
     for w in wards[1:]:
         df = pd.concat([df, pd.read_csv(w, index_col=0, dtype=str)], ignore_index=True)
 
-    # スクレイピングしたやつのLongtitudeとLatitudeが逆だったので変換
+    # スクレイピングした結果のLongtitudeとLatitudeが逆だったので変換
     df = df.rename(columns={'Longtitude': 'Latitude_tmp', 'Latitude': 'Longtitude_tmp'})
     df = df.rename(columns={'Latitude_tmp': 'Latitude', 'Longtitude_tmp': 'Longtitude'})
 
@@ -35,6 +43,7 @@ def create_db():
             row["Ward"] ="'"+row["Ward"]+"'"
             row["Address"] ="'"+row["Address"]+"'"
 
+            # sql query
             sql_query = "insert into babymap values(" + str(key) + ',' + ','.join(list(row)) + ");"
             try:
                 cur.execute(sql_query)
@@ -43,4 +52,6 @@ def create_db():
                 conn.rollback()
                 raise
 
-create_db()
+
+if __name__ == "__main__":
+    create_db()

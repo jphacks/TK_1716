@@ -33,6 +33,7 @@
     var directionsService;
     var directionsDisplay;
 
+      // mapの初期状態
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 14,
@@ -45,7 +46,10 @@
           preserveViewport: true
         });
 
+        // 現在地にpin
         addMarker(init_center, "現在地", true);
+
+        // 授乳室/オムツ台にpin
         {% for spot in near_spot%}
           add_spot = {lat: {{spot[2]}}, lng: {{spot[1]}}};
           addMarker(add_spot, "{{spot[0]}}", false);
@@ -59,7 +63,9 @@
         return arg;
       }
 
+      // pinの追加
       function addMarker(location, label, is_current_position){
+      // もし現在地ならデフォルトのpin
       if (is_current_position) {
         var marker = new google.maps.Marker({
             position: location,
@@ -67,6 +73,7 @@
             clickable: true,
           });
       }
+      // それ以外なら種類に対応したpin
       else {
           var marker = new google.maps.Marker({
             position: location,
@@ -80,11 +87,14 @@
           });
           }
 
-          var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-            content: label // 吹き出しに表示する内容
+          // 吹き出しの追加
+          var infoWindow = new google.maps.InfoWindow({
+            content: label
            });
+
           google.maps.event.addListener(marker, 'click', function()
           {
+           // すでに開かれてるinfowindowを閉じる
            if (currentInfoWindow) {
 				currentInfoWindow.close();
 			}
@@ -99,6 +109,7 @@
         alert("Yes");
       }
 
+      // 経路表示
       function ShowDirection(location){
         directionsDisplay.setMap(map);
         directionsService.route({

@@ -1,5 +1,6 @@
 #-*- coding: utf-8-*-
 # author : Takuro Yamazaki
+# description : mod_wsgi adapter
 
 import sys, os
 import bottle
