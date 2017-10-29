@@ -21,9 +21,9 @@
 求めた特徴量を機械学習モデルで、空腹、眠気、不快の３クラスに分類する。モデルの訓練には[donateacry-corpus](https://github.com/gveres/donateacry-corpus)のデータを用いた。このデータにはノイズが非常に多いため、人力で選別した上で、上と同様のデータ整形を行った。モデルとしては、random forestを採用した。訓練データによる5-fold cross validationで約65%の精度であった。各特徴量ごとにラベルを予測するが、音声は複数に分割されているので、最終的には、複数の特徴量のうち一番多く予測されたラベルを予測結果とする。この仕組みにより、高い精度で赤ちゃんの泣き声の原因推定が可能となっている。
 
 ## Requirement
-Python==2.7.13
-numpy==1.13.3
-scipy==0.19.1
-scikit-learn==0.19.0
-scikits.talkbox==0.2.5
-PyAudio==0.2.11
+Python==2.7.13 <br>
+numpy==1.13.3 <br>
+scipy==0.19.1 <br>
+scikit-learn==0.19.0 <br>
+scikits.talkbox==0.2.5 <br>
+PyAudio==0.2.11 
