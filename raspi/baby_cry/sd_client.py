@@ -263,19 +263,25 @@ def start_sound_detect():
 
 def sound_classifier(clf, cry_array):
     devided_cry_array = devide_cry_by_value(cry_array)    
+    if devided_cry_array is None:
+	return 0
     X = []
     for x in devided_cry_array:
         x = np.clip(x, 1e-10, 1)
         ceps,mspec,spec = mfcc(x, nwin=256, nfft=512, fs=8000, nceps=13)
         X.append(np.mean(ceps, axis=0))
     X = np.array(X)
+    if len(X) == 0:
+	return 0
+    if X.ndim == 1:
+	X = X[np.newaxis, :]
     pred = clf.predict(X)
     clas = Counter(pred).most_common(1)[0][0]
-    return clas 
+    return clas + 1
 
 def write_class(clas):
-    with open('../cry_class.txt', 'w') as f:
-       f.write(str(clas + 1)) 
+    with open('/home/pi/test/TK_1716/raspi/cry_class.txt', 'w') as f:
+       f.write(str(clas)) 
     return None
 
 
@@ -288,7 +294,8 @@ if __name__ == "__main__":
     cry_frames = np.array([])
     cry_flag = False
     write_class(0)
-    clf = joblib.load('trained_models/clf_rf.pkl.cmp')
+
+    clf = joblib.load('/home/pi/test/TK_1716/raspi/baby_cry/trained_models/clf_rf2.pkl.cmp')
     
     create_edge()
 
@@ -344,7 +351,7 @@ if __name__ == "__main__":
                 clas = sound_classifier(clf, cry_frames)
                 write_class(clas)
                 # sf.write("output.wav", cry_frames, in_stream._rate)
-                time.sleep(60)
+                time.sleep(10)
                 cry_flag = False
                 cry_frames = np.array([])
                 write_class(0)
