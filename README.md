@@ -1,6 +1,6 @@
 # あのね、
 
-<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.png" width="700px"></a>
+<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.gif" width="700px"></a>
 
 ## 製品概要
 ### Baby x Tech
@@ -46,7 +46,7 @@
 
 ### 製品説明（具体的な製品の説明）
 ウェアラブル端末を赤ちゃんのおむつに付けると、お母さんはアプリで赤ちゃんの様子を管理することができる。使用例を以下の図に示す。  
-<img src="https://github.com/jphacks/TK_1716/blob/master/img/usecase.png" width="600px">
+<img src="https://github.com/jphacks/TK_1716/blob/master/img/usecase.png" width="750px">
 
 ### 特長
 
@@ -64,7 +64,7 @@
 上記の通り、赤ちゃんの状態に異常が生じると現在地の近くにある授乳室やおむつ台への経路を表示する。
 
 #### 5. ウェアラブル端末とのBluetooth通信
-本製品は外出時の利用も想定しているため、wifi環境下でなくても利用できるよう、ウェアラブル端末とiOSとの通信をBluetoothで行った。
+本製品は外出時の利用も想定しているため、wifi環境下でなくても利用できるようウェアラブル端末とiOSとの通信をBluetoothで行った。
 
 
 ### 解決出来ること
@@ -94,6 +94,7 @@
 * [NEC Sound Event Recognition API](https://www6.arche.blue/portal/)
 
 #### フレームワーク・ライブラリ・モジュール
+* [swift](https://swift.org/)
 * [python](https://www.python.jp/)
 	- [Numpy](http://www.numpy.org/)
 	- [Scipy](https://www.scipy.org/)
