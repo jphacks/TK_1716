@@ -1,6 +1,6 @@
 # あのね、
 
-<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.gif" width="600px"></a>
+<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.png" width="700px"></a>
 
 ## 製品概要
 ### Baby x Tech
