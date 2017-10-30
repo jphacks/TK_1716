@@ -15,3 +15,8 @@ raspberry pi がハードウェアの中心として機能し、データ収集�
 確実に実装をすることを目的に開発したため、三つのバラバラなプログラムを同時には知らせるという構造になってしまった。今回使ったRaspberry Piはクアッドコアだったためなんとかなったが、軽量化の観点から、これらを一つにまとめて、シングルコアであるRaspberry Pi Zero Wなどで実行できるようにしたい。
 
 また、今回用いたセンサにアナログ出力のものがあったのでArduinoを使う必要があったが、センサの値の取得もRaspberry Pi+ADコンバーターとしてコンパクトにしたい。
+
+## Requirement
+Python==2.7.13 
+Node.js==6.11.5
+[Bleno](https://github.com/sandeepmistry/bleno)
