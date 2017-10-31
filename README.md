@@ -1,6 +1,6 @@
 # あのね、
 
-<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail_before.png" width="700px"></a>
+<a href="https://www.youtube.com/watch?v=9jZZrYWHrus&feature=youtu.be"><img src="https://github.com/jphacks/TK_1716/blob/master/img/thumbnail.png" width="700px"></a>
 
 ## 製品概要
 ### Baby x Tech
@@ -126,5 +126,7 @@
 ### 独自開発技術（Hack Dayで開発したもの）
 #### 2日間に開発した独自の機能・技術
 * [赤ちゃん音声の分類モデル作成](https://github.com/jphacks/TK_1716/blob/master/raspi/baby_cry/README.md)
-* 各種センサ情報の取得、整形および通信
+* 各種センサ情報の取得、整形およびBluetooth通信
 * iOSアプリケーションのインターフェース作成、画面遷移
+* 近くの授乳室、おむつ台への道案内ページ
+* AWSサーバとの通信
