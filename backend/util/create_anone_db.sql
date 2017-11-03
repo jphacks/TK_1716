@@ -2,7 +2,7 @@ CREATE DATABASE anone;
 USE anone;
 
 CREATE TABLE babymap(
-    id int unsigned,
+    id int unsigned unique,
     Name varchar(256),
     Prefecture varchar(256),
     Ward varchar(256),
